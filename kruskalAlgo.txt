@@ -1,0 +1,114 @@
+import java.util.Scanner; 
+public  class Main 
+{ 
+int parent[]=new int[10]; 
+//function to find the root of a given vertex 
+int find(int m) 
+{ 
+int p=m;
+while(parent[p]!=0) 
+p=parent[p]; 
+ return p; 
+} 
+ //function to merge two trees into single tree 
+void union(int i,int j) 
+ { 
+ if(i<j) 
+ parent[i]=j; 
+ else parent[j]=i; 
+ }
+void krkl(int[][]c, int n) 
+
+ { 
+
+ int u=0,v=0,min,k=0,i,j,sum=0; 
+
+ //find an edge with least cost 
+
+ while(k<n-1)
+
+ { 
+
+ min=999; 
+
+ for(i=1;i<=n;i++) 
+
+ for(j=1;j<=n;j++) 
+
+ if(c[i][j]<min && i!=j) 
+
+ { min=c[i][j]; 
+
+ u=i; 
+
+ v=j; 
+
+ } 
+
+ i=find(u); 
+
+ j=find(v); 
+
+ 
+
+/* if the roots of vertex u & v are different then select the edge (u.v)*/ 
+
+ if(i!=j) 
+
+ { 
+
+ union(i,j); //merge the two trees with the roots i & j 
+
+ System.out.println("("+u+","+v+")"+"="+c[u][v]); 
+
+ 
+
+sum=sum+c[u][v]; 
+
+ k++; 
+
+ } 
+
+ c[u][v]=c[v][u]=999; //delete the edge(u,v) from the list 
+
+ 
+
+ } 
+
+ System.out.println("The cost of minimum spanning tree = "+sum); 
+
+ } 
+
+public static void main(String[] args) 
+
+{ 
+
+ int c[][]=new int[10][10]; 
+
+ int i,j,n; 
+
+ Scanner sc=new Scanner(System.in); 
+
+ System.out.println("Enter the number of vertices in the graph"); 
+
+ n=sc.nextInt(); 
+
+ System.out.println("Enter the wieghted matrix"); 
+
+ for(i=1;i<=n;i++) 
+
+ for(j=1;j<=n;j++) 
+
+ c[i][j]=sc.nextInt(); 
+
+ Main k=new Main();
+ k.krkl(c,n); 
+
+ 
+
+} 
+
+ } 
+
+
+
